@@ -1,26 +1,32 @@
 import React, { FormEvent, ChangeEvent } from 'react';
 import { useState } from 'react';
+import axios from 'axios';
 
 export default function PostCreate() {
   const [postInputText, setPostInputText] = useState<string>('');
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setPostInputText(event.target.value);
   };
 
-  const handlePostSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setPostInputText('');
+    console.log(postInputText);
+    await axios.post('http://localhost:4000/posts', { title: postInputText });
+
     console.log(postInputText);
   };
 
   return (
     <div>
-      <form onSubmit={handlePostSubmit} className="form-group">
+      <form onSubmit={handleSubmit} className="form-group">
         <label htmlFor="post-title">Title</label>
         <input
           id="post-title"
           type="text"
-          onChange={handleInputChange}
+          value={postInputText}
+          onChange={handleChange}
           className="form-control"
         />
         <button className="btn btn-primary">Submit</button>
