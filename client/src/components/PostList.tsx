@@ -2,10 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 export default function PostList() {
-  const [postList, setPostList] = useState<string[]>([]);
+  const [postList, setPostList] = useState<Object>({});
 
   const fetchPosts = async () => {
-    const posts = (await axios.get('http://localhost:4000/posts')) as string[];
+    const response = await axios.get('http://localhost:4000/posts');
+    const posts = response.data;
     setPostList(posts);
     console.log(postList);
   };
@@ -13,6 +14,10 @@ export default function PostList() {
   useEffect(() => {
     fetchPosts();
   }, []);
+
+  const postsRenderer = () => {
+    postList.map((post) => <div>{post.title}</div>);
+  };
 
   return (
     <div>
