@@ -32,9 +32,9 @@ export default function PostList() {
     >
       <div className="card-body" key={post.id}>
         <h3>{post.title}</h3>
+        <CommentList postId={post.id} />
+        <CommentCreate postId={post.id} />
       </div>
-      <CommentList postId={post.id} />
-      <CommentCreate postId={post.id} />
     </div>
   ));
 
