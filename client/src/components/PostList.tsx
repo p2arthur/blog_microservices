@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import CommentCreate from './CommentCreate';
 import CommentList from './CommentList';
 
-interface post {
+interface postInterface {
   id: string;
-  title: { title: string };
+  title: string;
 }
 
 export default function PostList() {
@@ -21,8 +21,8 @@ export default function PostList() {
   useEffect(() => {
     fetchPosts();
   }, []);
-  const renderedPosts: post[] = Object.values(postList);
-  console.log(renderedPosts);
+  const renderedPosts: postInterface[] = Object.values(postList);
+  console.log('renderedPosts:', renderedPosts);
 
   const postsToRender = renderedPosts.map((post) => (
     <div
@@ -30,11 +30,11 @@ export default function PostList() {
       key={post.id}
       style={{ width: '30%', marginBottom: '20px' }}
     >
-      <div className="card-body">
-        <h3>{post.title.title}</h3>
+      <div className="card-body" key={post.id}>
+        <h3>{post.title}</h3>
       </div>
-      <CommentCreate postId={post.id} />
       <CommentList postId={post.id} />
+      <CommentCreate postId={post.id} />
     </div>
   ));
 

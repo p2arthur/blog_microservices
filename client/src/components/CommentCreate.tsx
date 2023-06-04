@@ -1,6 +1,11 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import axios from 'axios';
-export default function CommentCreate(postId: string) {
+
+interface propsInterface {
+  postId: string;
+}
+
+export default function CommentCreate({ postId }: propsInterface) {
   const [commentInput, setCommentInput] = useState<string>('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +21,8 @@ export default function CommentCreate(postId: string) {
       `http://localhost:4001/posts/${postId}/comments`,
       { content }
     );
-    console.log('Comment created:', response.data, postId);
+    console.log('post id:', postId);
+    console.log('Comment created:', response.data);
 
     setCommentInput('');
   };

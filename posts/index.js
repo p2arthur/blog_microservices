@@ -22,7 +22,7 @@ app.get('/posts', (req, res) => {
 //When sending a post request to /posts create a new post
 app.post('/posts', (req, res) => {
   const id = randomBytes(4).toString('hex');
-  const title = req.body;
+  const title = req.body.title;
   posts[id] = { id, title };
 
   res.status(201).send(posts[id]);
