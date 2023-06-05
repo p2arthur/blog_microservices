@@ -38,9 +38,7 @@ app.post('/posts', async (req, res) => {
 //Request handler to take care of events coming from the event bus
 
 app.post('/events', (req, res) => {
-  console.log('Received Event', req.body.type);
-
-  res.send(201, 'Request received');
+  res.sendStatus(201, 'Request received');
 });
 
 //----------------------------------------------------------------------------
