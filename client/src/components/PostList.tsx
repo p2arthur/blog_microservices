@@ -6,13 +6,14 @@ import CommentList from './CommentList';
 interface postInterface {
   id: string;
   title: string;
+  comments: string[];
 }
 
 export default function PostList() {
   const [postList, setPostList] = useState<object>({});
 
   const fetchPosts = async () => {
-    const response = await axios.get('http://localhost:4000/posts');
+    const response = await axios.get('http://localhost:4002/posts');
     const posts = response.data;
     setPostList(posts);
     console.log(postList);
@@ -32,7 +33,7 @@ export default function PostList() {
     >
       <div className="card-body" key={post.id}>
         <h3>{post.title}</h3>
-        <CommentList postId={post.id} />
+        <CommentList comments={post.comments} />
         <CommentCreate postId={post.id} />
       </div>
     </div>
